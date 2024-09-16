@@ -58,7 +58,7 @@ app.post('/editPost/:index', (req, res) => {
 // delete given post at given index
 app.post('/deletePost', (req, res) => {
     // get the index and remove from list
-    const postIndex = req.body.index
+    const postIndex = existingPosts.findIndex(deletePost => deletePost.index == req.body.index);
     existingPosts.splice(postIndex, 1);
     res.redirect("/")
 });
