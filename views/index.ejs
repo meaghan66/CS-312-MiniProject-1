@@ -26,8 +26,8 @@
 
     <!-- if there are multiple posts -->
     <% if (existingPosts.length > 0) { %>
-        <!-- for each one -->
-        <% existingPosts.forEach(post => { %>
+        <!-- for each post (display by the newest at the top) -->
+        <% existingPosts.slice().reverse().forEach(post => { %>
             <div>
                 <!-- display the title, author, and text content -->
                 <h2 style="display:inline;"><%= post.postTitle %> </h2>
