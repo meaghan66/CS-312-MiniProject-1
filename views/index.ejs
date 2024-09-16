@@ -1,27 +1,50 @@
-<link rel="stylesheet" href="/styles.css">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlogChamp 2.0</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
 
-<h1>Blog Posts</h1>
+    <h1>BlogChamp 2.0</h1>
 
-<h2>Create a New Post</h2>
-<form action="/create" method="POST">
-    <input type="text" name="title" placeholder="Title" required>
-    <input type="text" name="author" placeholder="Author" required>
-    <textarea name="content" placeholder="Write your post..." required></textarea>
-    <button type="submit">Submit</button>
-</form>
+    <!-- setup for creating a new post -->
+    <h2>Create a New Post</h2>
+    <form action="/createPost" method="POST">
+        <!-- get the title, author, and the text content -->
+        <input type="text" name="postTitle" placeholder="Title: " required>
+        <input type="text" name="postAuthor" placeholder="Author Name: " required>
+        <textarea name="postContent" placeholder="Write your post: " required></textarea>
+        <button type="submit">Submit</button>
+    </form>
 
-<% if (posts.length > 0) { %>
-    <% posts.forEach(post => { %>
-        <div>
-            <h2><%= post.title %></h2>
-            <p>by <%= post.author %> on <%= post.date %></p>
-            <p><%= post.content %></p>
-            <a href="/edit/<%= post.id %>">Edit</a>
-            <form action="/delete/<%= post.id %>" method="POST" style="display:inline;">
-                <button type="submit">Delete</button>
-            </form>
-        </div>
-        <hr>
-    <% }) %>
-<% } %>
+    <hr>
 
+    <!-- display all of the created posts on the main page -->
+
+    <!-- if there are multiple posts -->
+    <% if (existingPosts.length > 0) { %>
+        <!-- for each one -->
+        <% existingPosts.forEach(post => { %>
+            <div>
+                <!-- display the title, author, and text content -->
+                <h2><%= post.postTitle %></h2>
+                <p>by <%= post.postAuthor %> on <%= post.date %></p>
+                <p><%= post.postContent %></p>
+
+                <!-- each post contains an edit button and a delete button -->
+                <form action="/editPost/<%= post.index %>" method="GET" style="display:inline;">
+                    <button type="submit">Edit</button>
+                </form>
+                <form action="/deletePost" method="POST" style="display:inline;">
+                    <button type="submit">Delete</button>
+                </form>
+            </div>
+            <hr>
+        <% }) %>
+    <% } %>
+
+</body>
+</html>
